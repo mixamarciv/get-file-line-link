@@ -1,0 +1,43 @@
+{
+  "name": "get-file-line-link",
+  "displayName": "get-file-line-link",
+  "description": "%extension.description%",
+  "version": "1.0.0",
+  "publisher": "mixamarciv",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "get-file-line-link.processLine",
+        "title": "%command.title%",
+        "category": "Line Actions"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "get-file-line-link.processLine",
+          "group": "navigation",
+          "when": "editorTextFocus"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./ "
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.18",
+    "@types/vscode": "^1.100.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "extension.description": "Adds the ability to get a link to a file string in the git repository",
+  "command.title": "Get a link to this line"
+}
