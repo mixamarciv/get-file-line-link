@@ -60,23 +60,10 @@ function generateFileLink(currentFilePath: string, lineNumber: number): string {
 		const packageJson = JSON.parse(packageJsonRaw);
 
 		// 3. Извлекаем URL репозитория
-		let repoUrl = '';
-		if (typeof packageJson.repository === 'string') {
-			repoUrl = packageJson.repository;
-		} else if (packageJson.repository?.url) {
-			repoUrl = packageJson.repository.url;
-		}
-
-		if (!repoUrl) {
-			// Если поля нет, искусственно вызываем переход в блок catch
-			throw new Error('В package.json не указано поле repository.url');
-		}
-
-		// Очищаем URL от git-префиксов и суффиксов
-		repoUrl = repoUrl.replace(/^git\+/, '').replace(/\.git$/, '');
+		const repoUrl = getRepoUrl(packageJson);
 
 		// 4. Извлекаем версию или ветку
-		const version = packageJson.version || 'main';
+		const version = getVersionPath(packageJson);
 
 		// 5. Возвращаем полную ссылку, если всё прошло успешно
 		return `${repoUrl}/-/blob/${version}/${relativeFilePath}#L${lineNumber}`;
@@ -91,6 +78,39 @@ function generateFileLink(currentFilePath: string, lineNumber: number): string {
 		// Возвращаем только относительный путь и строку
 		return `/${relativeFilePath}#L${lineNumber}`;
 	}
+}
+
+function getRepoUrl(packageJson: any): string {
+	let repoUrl = '';
+	if (typeof packageJson.repository === 'string') {
+		repoUrl = packageJson.repository;
+	} else if (packageJson.repository?.url) {
+		repoUrl = packageJson.repository.url;
+	}
+
+	if (!repoUrl) {
+		throw new Error('В package.json не указано поле repository.url');
+	}
+
+	// Очищаем URL от git-префиксов и суффиксов
+	repoUrl = repoUrl.replace(/^git@/, '').replace(/^git\+/, '').replace(/\.git$/, '');
+
+	repoUrl = repoUrl.replace(':', '/');
+
+	return repoUrl;
+}
+
+
+function getVersionPath(packageJson: any): string {
+	let ver = packageJson.version;
+	if (!ver) {
+		return 'main';
+	}
+
+	ver = ver.replace(/\.0$/, '');
+	ver = `rc-${ver}`;
+
+	return ver;
 }
 
 /**
