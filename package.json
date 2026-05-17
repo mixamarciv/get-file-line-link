@@ -39,5 +39,9 @@
     "@types/node": "^22.19.18",
     "@types/vscode": "^1.100.0",
     "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mixamarciv/get-file-line-link.git"
   }
 }
