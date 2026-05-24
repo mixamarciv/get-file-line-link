@@ -19,5 +19,5 @@ npm run watch
 vsce package
 
 # Для установки расширения:
-code --install-extension get-file-line-link-1.0.0.vsix
+code --install-extension get-file-line-link-1.0.1.vsix
 # после повторной установки нужно перезапустить расширение в самом vscode

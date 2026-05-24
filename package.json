@@ -2,15 +2,25 @@
   "name": "get-file-line-link",
   "displayName": "get-file-line-link",
   "description": "%extension.description%",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "mixamarciv",
   "engines": {
     "vscode": "^1.100.0"
   },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": true
+    }
+  },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:getFileLineLink.openCustomScript"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -18,6 +28,10 @@
         "command": "get-file-line-link.processLine",
         "title": "%command.title%",
         "category": "Line Actions"
+      },
+      {
+        "command": "getFileLineLink.openCustomScript",
+        "title": "Get File Line Link: Изменить скрипт обработки URL"
       }
     ],
     "menus": {
@@ -28,6 +42,16 @@
           "when": "editorTextFocus"
         }
       ]
+    },
+    "configuration": {
+      "title": "Get File Line Link",
+      "properties": {
+        "getFileLineLink.customScriptPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Путь к JS-файлу обработки URL. Оставьте пустым для использования встроенного файла. [Открыть файл обработчика для редактирования](command:getFileLineLink.openCustomScript)"
+        }
+      }
     }
   },
   "scripts": {
