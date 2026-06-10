@@ -2,10 +2,10 @@
   "name": "get-file-line-link",
   "displayName": "get-file-line-link",
   "description": "%extension.description%",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "mixamarciv",
   "engines": {
-    "vscode": "^1.100.0"
+    "vscode": "^1.90.0"
   },
   "capabilities": {
     "untrustedWorkspaces": {
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.19.18",
-    "@types/vscode": "^1.100.0",
+    "@types/vscode": "^1.90.0",
     "typescript": "^5.9.3"
   },
   "repository": {
